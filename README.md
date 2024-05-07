@@ -12,7 +12,7 @@ In this week-long workshop, led by Paula Loreto Granados García (EMKP, The Brit
   -  Afternoon Session:
   
 - **Wednesday**, May 15, 2024, 11:00 am–4:00 pm (EDT), including lunch break and lab time: Other Types of Data and Visualizations. Images, video, and more. Data visualization basics and tools (Voyant, Tableau, TimelineJS, and more).
-  - [Morning Session: Other Types of Data] (https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Wokshop-2024/wiki/Wednesday-Morning-Session-5%3A-Other-Types-of-Data-and-Visualizations.-Images%2C-video%2C-3D-and-more./)
+  - [Morning Session: Other Types of Data](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Wokshop-2024/wiki/Wednesday-Morning-Session-5%3A-Other-Types-of-Data-and-Visualizations.-Images%2C-video%2C-3D-and-more./)
   - Afternoon Session
 
 - **Thursday**, May 16, 2024, 11:00 am–4:00 pm (EDT), including lunch break and lab time: Linked Open Data and Geospatial Visualization. Introduction to the Semantic Web and Linked Open Data Technologies (LOD). LOD resources and cultural heritage. Data reconciliation with OpenRefine. The basics of spatial humanities, geodata, and map visualizations using LOD.
