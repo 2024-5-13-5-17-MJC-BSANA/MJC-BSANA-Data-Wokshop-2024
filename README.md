@@ -8,7 +8,7 @@ In this week-long workshop, led by Paula Loreto Granados García (EMKP, The Brit
   - Afternoon Session:
     
 - **Tuesday**, May 14, 2024, 10:00 am–3:30 pm (EDT), including lunch break and lab time: Data Acquisition and Network Analysis. Data sources and repositories. Data extraction. Clean and manage datasets with OpenRefine. The basics of social network analysis. Use Cytoscape and Gephi to construct and visualize a network based on your own dataset and upload it to your GitHub page.
-  - [Morning Session: Data management and cleaning](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Wokshop-2024/wiki/Tuesday-Morning-Session:-Data-Management-and-cleaning)
+  - [Morning Session: Data management and cleaning](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Wokshop-2024/wiki/Tuesday-Morning-Session-3:-Data-Management-and-cleaning))
   -  Afternoon Session:
   
 - **Wednesday**, May 15, 2024, 11:00 am–4:00 pm (EDT), including lunch break and lab time: Other Types of Data and Visualizations. Images, video, and more. Data visualization basics and tools (Voyant, Tableau, TimelineJS, and more).
