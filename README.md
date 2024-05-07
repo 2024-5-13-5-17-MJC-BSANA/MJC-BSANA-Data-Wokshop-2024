@@ -16,7 +16,7 @@ In this week-long workshop, led by Paula Loreto Granados García (EMKP, The Brit
   - Afternoon Session
 
 - **Thursday**, May 16, 2024, 11:00 am–4:00 pm (EDT), including lunch break and lab time: Linked Open Data and Geospatial Visualization. Introduction to the Semantic Web and Linked Open Data Technologies (LOD). LOD resources and cultural heritage. Data reconciliation with OpenRefine. The basics of spatial humanities, geodata, and map visualizations using LOD.
-  - [Morning Session: Introduction to LOD and data reconciliation] (https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Wokshop-2024/wiki/Thursday-Moning-Session-7:-Introduction-to-LOD-and-data-reconciliation-with-Open-Refine)
+  - [Morning Session: Introduction to LOD and data reconciliation] (https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Wokshop-2024/wiki/Thursday-Morning-Session-7:-Introduction-to-LOD-and-data-reconciliation-with-Open-Refine)
   - Afternoon Session
   
 - **Friday**, May 17, 2024, 11:00 am–4:00 pm (EDT), including lunch break and lab time: Dissemination and Advanced Tools. Data sharing. Digital storytelling. The basics of Python and Jupyter Notebook—tabular data, geospatial, network, and visualization libraries, publish your notebook, resources for further learning.
