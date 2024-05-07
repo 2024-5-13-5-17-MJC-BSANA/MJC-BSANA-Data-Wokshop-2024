@@ -20,8 +20,8 @@ In this week-long workshop, led by Paula Loreto Granados García (EMKP, The Brit
   - Afternoon Session:
   
 - **Friday**, May 17, 2024, 11:00 am–4:00 pm (EDT), including lunch break and lab time: Dissemination and Advanced Tools. Data sharing. Digital storytelling. The basics of Python and Jupyter Notebook—tabular data, geospatial, network, and visualization libraries, publish your notebook, resources for further learning.
--   Morning Session:
--   Afternoon Session: 
+  - Morning Session:
+  - Afternoon Session: 
 
 # Time Commitment & Prerequisites
 
