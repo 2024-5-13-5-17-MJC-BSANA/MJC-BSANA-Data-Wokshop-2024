@@ -3,7 +3,7 @@
 - Visual Studio Code
     - [https://code.visualstudio.com/](https://code.visualstudio.com/)
 - Git
-    -[https://git-scm.com/book/en/v2/Getting-Started-Installing-Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+    - [https://git-scm.com/book/en/v2/Getting-Started-Installing-Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - GitHub Desktop
     -  [https://desktop.github.com/](https://desktop.github.com/)
 - Gephi
