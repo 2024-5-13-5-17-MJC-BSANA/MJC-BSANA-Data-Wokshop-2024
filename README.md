@@ -20,7 +20,7 @@ In this week-long workshop, led by Paula Loreto Granados García (EMKP, The Brit
   - Afternoon Session
   
 - **Friday**, May 17, 2024, 10:00 am–3:30 pm (EDT), including lunch break and lab time: Dissemination and Advanced Tools. Data sharing. Digital storytelling. The basics of Python and Jupyter Notebook—tabular data, geospatial, network, and visualization libraries, publish your notebook, resources for further learning.
-  - Morning Session:
+  - [Morning Session: Digital Curation, Storytelling and Dissemination](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Workshop-2024/wiki/Friday-Morning-Session-9:-Digital-Curation-Storytelling-and-Dissemination)
   - Afternoon Session: 
 
 # Time Commitment & Prerequisites
