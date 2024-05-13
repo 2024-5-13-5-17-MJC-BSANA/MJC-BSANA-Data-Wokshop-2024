@@ -1,0 +1,1269 @@
+---
+title: "1.2: Git and Version Control"
+author: "<b>Ryan Horne</b> <br/> UCLA OARC <br/> rmhorne@ucla.edu <br/>Twitter: @RyanMHorne"
+format:
+ revealjs:
+  preview-links: true
+  logo: images/CC_BY-SA_icon.svg
+  theme: [default, styles.scss]
+title-slide-attributes:
+ data-background-color: "#005c96"
+ data-background-size: 6%
+ data-background-position: 100% 100%   
+---
+
+## Intro
+
+Today we will be looking at Version control using Git, Bash, and GitHub. If you have not done so already, you need to install Git and create an account on GitHub. This part of the workshop is adapted from data carpentries; if you want more details I recommend starting there.
+
+## Agenda {auto-animate="true"}
+
+We will:
+
+::: incremental
+-   Continue a little about project structure
+-   Talk about bash and Git
+-   Run Git from the command line
+-   Setup GitHub account
+-   Fork a repository
+:::
+
+## Quick Side Note
+
+The color palette that I am using was developed by Masataka Okabe (Jikei Medical School) and Kei Ito (University of Tokyo). It is colorblind friendly and is under the recommended MAXIMUM of 8 categories. See <https://siegal.bio.nyu.edu/color-palette/>.
+
+## What do YOU do? {auto-animate="true"}
+
+Unmute or on chat, tell us!
+
+::: incremental
+-   How do you organize your projects now?
+    -   Yes, your writing is a project!
+-   How do you collaborate with others?
+    -   What programs do you use, if any?
+    -   Do you have shared drives? Documents?
+-   How much thought do you put into the organization and mechanics of your digital projects?
+:::
+
+## So, You Want to Make a DH Project {auto-animate="true"}
+
+::: incremental
+-   Does your file structure and naming make sense?
+-   Is your raw data separate from what you are working on?
+:::
+
+## Some Basic Organizational Points {auto-animate="true"}
+
+::: columns
+::: {.column width="50%"}
+-   Keep raw data in a separate directory from your working data
+
+::: incremental
+-   **DO NOT TOUCH IT**
+    -   Copy it, *then* open it
+        -   Programs *can* modify your data just by opening it!
+    -   If in doubt, look above
+:::
+:::
+
+::: {.column width="50%"}
+![](images/rawdatachange.jpg){width="80%"}
+:::
+:::
+
+## So, You Want to Make a DH Project Part 2 {auto-animate="true"}
+
+::: incremental
+-   Does your file structure and naming make sense?
+-   Is your raw data separate from what you are working on?
+-   Is your README up to speed?
+-   Wait a second.....
+:::
+
+## Why a README? {auto-animate="true"}
+
+::: incremental
+-   First rule of DH: Document, document, document
+-   Second rule of DH: Document, document, document
+-   Seriously...
+-   Document, document, document
+-   A README file can save **you** countless hours, let alone any collaborators
+:::
+
+## What is a README? {.smaller auto-animate="true"}
+
+::: incremental
+-   You should ***ALWAYS*** have a README.md file. ***ALWAYS!!!!***
+    -   Think of this as a love letter to yourself. Do you remember everything about your data? Columns? Abbreviations? What you had for breakfast?
+    -   Where did you get your data form? What were the data formats? What did you do to it? Etc.
+-   Some great templates out there (I linked to UCSB Research Data Services one)
+-   There might be field specific things that you need
+    -   If so, best practice to make some blank README files as templates, then copy over and modify as needed
+:::
+
+## How to do a README? {auto-animate="true"}
+
+![https://doi.org/10.5281/zenodo.10828379](images/readme-template.png)
+
+## Time to do DH! {auto-animate="true"}
+
+::: fragment
+Now we are ready to do some serious Digital Humanities!
+:::
+
+<br/> <br/>
+
+::: fragment
+However.....
+:::
+
+## What We (Probably) Want to Avoid {auto-animate="true"}
+
+![From MIT Broad Research Communication Lab](images/file-structure-messydesktop.jpg)
+
+## One Problem {auto-animate="true"}
+
+![](images/phd101212s.png){.absolute top="55" right="30%"}
+
+## Another Problem {auto-animate="true"}
+
+{{< video images/homer.mp4 height="600">}}
+
+## Yet Another Problem
+
+![](images/cofcomp.jpg)
+
+## What is the Worst that Can Happen With This Mess? {auto-animate="true"}
+
+{{< video https://www.youtube.com/watch?v=q0POXW4V1_k width="85%" height="85%" start="006" >}}
+
+## Seriously Though - Our Issues {auto-animate="true"}
+
+::: incremental
+-   How do you keep track of changes, modifications, etc?
+    -   How can you roll things back to a previous state?
+    -   How can you recover from a spilled coffee mug?
+    -   How do you recapture that wonderful paragraph that is *waaaaay* past undo?
+    -   How do you effectively collaborate?
+    -   How do you share your data and findings?
+    -   How can you setup free web space?
+:::
+
+## Version Control {auto-animate="true"}
+
+::: incremental
+-   Basic idea: track changes in a file / directory
+    -   Also to reconcile different versions of a file
+    -   There is some functionality for this built into Word and Google Docs
+-   Think of changes as separate from the document / file
+    -   This is a common theme in the workshop: [***presentation and data are different***]{.underline}
+-   Helps with project organization, reusability, reproducibility, and portability
+:::
+
+## Basic Functionality {auto-animate="true"}
+
+![](images/play-changes.svg)
+
+## Multiple Users {auto-animate="true"}
+
+![](images/merge.svg){.absolute top="55" right="30%"}
+
+## Git {auto-animate="true"}
+
+![](images/git-main.png)
+
+## Git {.smaller}
+
+::: incremental
+-   First made in 2005 to track development of Linux kernel
+-   Free and open source distributed version control system
+-   ~ 95% of developers reporting it as their primary version control system as of 2022
+-   You can use it for all kinds of computer files
+-   Small and lightweight
+-   Command line and applications
+    -   Deployments in GitHub, SourceForge, Bitbucket and GitLab
+-   We are going to learn things the hard way, then shift to the easy way
+:::
+
+## Time For the Command Line! {auto-animate="true"}
+
+![](images/do_not_fear_command_line.png){.absolute top="55" right="30%"}
+
+## Get Started: The Command Line {auto-animate="true"}
+
+::: incremental
+-   Terminal for mac
+
+-   Command line for windows
+
+-   Using the same account info as your GitHub account, you configure Git by typing in the following:
+
+::: fragment
+
+``` bash
+    $ git config --global user.name "Vlad Dracula"
+    $ git config --global user.email "vlad@tran.sylvan.ia"
+```
+:::
+
+-   If you elect to use a private email address with GitHub, then use that same email address for the user.email value, e.g. *username\@users.noreply.github.com* replacing username with your GitHub one.
+:::
+
+## More Configurations {auto-animate="true"}
+
+We will be using VS Code as our example; we set this with the following command:
+
+
+::: fragment
+
+``` bash
+$ git config --global core.editor "code --wait"
+```
+
+:::
+
+
+## Name the Default Branch {auto-animate="true"}
+
+Now we will set Git to use the name "main" for default branches. More on branches later....
+
+::: fragment
+
+``` bash
+$ git config --global init.defaultBranch main
+```
+:::
+
+::: fragment
+<br/>
+Historical note: 
+<br/> You may encounter ```master``` instead of main in documentation, files, projects, etc. This was very problematic as a naming convention, and so many of us are switching to ```main```.
+:::
+
+## See Our Configurations {auto-animate="true"}
+
+``` bash
+$ git config --list
+```
+
+## Help! {auto-animate="true"}
+
+``` bash
+$ git config -h
+$ git config --help
+$ git help
+```
+
+<br/> <br/>
+
+::: fragment
+Now we are ready to use Git!
+:::
+
+## Basic Idea {auto-animate="true"}
+
+![](images/git-staging-area.svg)
+
+## Git Overview {auto-animate="true"}
+
+![](images/git-overview.svg)
+
+## Git Overview {.smaller auto-animate="true"}
+
+::: {data-id="box" style="background: #CC79A7; padding: 8px;"}
+Create
+:::
+
+::: {data-id="box" style="background: #0072B2; padding: 8px;"}
+Git Add
+:::
+
+::: {data-id="box" style="background: #F0E442; padding: 8px;"}
+Git Commit
+:::
+
+::: {data-id="box" style="background: #009E73; padding: 8px;"}
+GitHub
+:::
+
+::: {data-id="box" style="background: #56B4E9; padding: 8px;"}
+Branch
+:::
+
+::: {data-id="box" style="background: #E69F00; padding: 8px;"}
+Pull Request
+:::
+
+##  {auto-animate="true" .smaller}
+
+<h3>
+
+::: {data-id="box" style="background: #CC79A7; padding: 10px;"}
+Create
+:::
+
+</h3>
+
+::: fragment
+First step: Are we making something new or cloning?
+:::
+
+::: incremental
+-   If it is cloning, then clone in a working directory that makes sense
+    - Cloning makes a *local* copy of a repository
+    - Still has references to that repository
+    - Might not be owned by you 
+-   If we are creating something new, then we can create it directly on the local machine OR create a new remote repository
+    -   We will start by making something local
+:::
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #CC79A7; padding: 10px;"}
+Create
+:::
+
+</h3>
+
+::: incremental
+-   First, navigate to a place where you can put files. The *Desktop* can be a good choice; *Documents* or some other directory is probably better.
+-   Once there, let's make a directory and go into it
+:::
+
+::: fragment
+``` bash
+$ cd ~/Desktop
+$ mkdir bsana2024
+$ cd bsana2024
+$ ls
+```
+:::
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #CC79A7; padding: 10px;"}
+Create
+:::
+
+</h3>
+
+::: fragment
+Now we need to create the empty repository for git
+:::
+
+::: fragment
+``` bash
+$ git init
+```
+:::
+
+::: fragment
+Now list the directory
+:::
+
+::: fragment
+``` bash
+$ ls
+```
+:::
+
+## {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #CC79A7; padding: 10px;"}
+Create 
+:::
+
+</h3>
+
+::: fragment
+We do not see anything in the directory...but it is hidden
+:::
+
+::: fragment
+``` bash
+$ ls -a
+```
+:::
+
+
+## {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #CC79A7; padding: 10px;"}
+Create 
+:::
+
+</h3>
+
+We Need a README.md!
+
+::: incremental
+-   Grab it from what we saw before: <https://doi.org/10.5281/zenodo.10828379>
+-   Open it in your favorite text editor (or *Visual Studio Code*)
+-   Make some modifications to the file!
+:::
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #0072B2; padding: 10px;"}
+Git Add
+:::
+
+</h3>
+
+Tell Git What is Going On
+
+::: incremental
+-   Just adding a file is not enough for the command line; now we need to tell Git it is there
+-   This is done with the `git add` command
+:::
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #0072B2; padding: 10px;"}
+Git Add
+:::
+
+</h3>
+
+This ensures that your files are now seen by Git. This allows you to experiment with data, etc and only add it to be tracked when you are ready to do so.
+
+::: fragment
+``` bash
+$ git add file_name
+```
+:::
+
+::: fragment
+Now we need to tell Git what we did
+:::
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #F0E442; padding: 10px;"}
+Git Commit
+:::
+
+</h3>
+
+![](images/git-committing.svg)
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #F0E442; padding: 10px;"}
+Git Commit
+:::
+
+</h3>
+
+::: incremental
+-   Think of a commit point as a "save point"
+-   Git tracks changes *BETWEEN* commits
+-   You should *always* include a message on commits
+    -   Remember what we should do in DH projects?
+:::
+::: fragment
+``` bash
+$ git commit -m "valuable_but_short_message_here"
+```
+:::
+
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #F0E442; padding: 10px;"}
+Git Commit
+:::
+
+</h3>
+
+What did we do? Let's check!
+
+::: fragment
+``` bash
+$ git status
+```
+:::
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #F0E442; padding: 10px;"}
+Git Commit
+:::
+
+</h3>
+
+Let's see the history about this commit
+
+::: fragment
+``` bash
+$ git log
+```
+:::
+
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #F0E442; padding: 10px;"}
+Git Commit
+:::
+
+</h3>
+
+Quick exercise: Can you add a directory with files into the repository?
+
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #F0E442; padding: 10px;"}
+Git Commit
+:::
+
+</h3>
+
+What about files I do *not* want?
+
+::: incremental
+- If I am adding directories
+- Files that are huge, there for testing, etc
+- Also hidden system files
+- This is the ```.gitignore``` file
+- Create a ```.gitignore``` file, another text file, then add the name of the file to ```.gitignore```.
+:::
+
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #F0E442; padding: 10px;"}
+Git Commit
+:::
+
+</h3>
+::: fragment
+
+What if we want to *revert* a commit?
+:::
+
+::: fragment
+First, let's list our commits
+
+:::
+
+::: fragment
+``` bash
+$ git log --oneline
+```
+:::
+
+::: fragment
+Then find the one we want and revert it
+
+:::
+
+::: fragment
+``` bash
+$ git revert id
+```
+:::
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub
+:::
+
+</h3>
+
+Now What?
+
+::: fragment
+We setup a local repository, everything is going smoothly. We now want to:
+:::
+
+::: incremental
+- Backup our repository
+- Be able to access / change / contribute to our work from anywhere 
+- Show the world if we want to
+:::
+
+::: fragment
+::: {data-id="box"}
+We need a remote repository server. The most used / famous is GitHub
+:::
+:::
+
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub
+:::
+
+</h3>
+
+::: columns
+::: {.column width="50%"}
+
+::: incremental
+- GitHub is a for-profit service that hosts remote git repositories
+- HTML interface
+- Does lots of things easily
+- Free service for many projects (public *and* private!)
+:::
+:::
+
+::: {.column width="50%"}
+![](images/github-mark.svg){width="80%"}
+:::
+:::
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub
+:::
+
+</h3>
+
+::: incremental
+- Create a new repository on GitHub
+- Link Our local repository
+- Get changes from GitHub to our local repository
+:::
+
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub : New Repository
+:::
+
+</h3>
+
+::: incremental
+- Login
+- Click on “Repositories”
+- Click on the green button “New”
+- WAIT before going further!
+:::
+
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub : Link the Local
+:::
+
+</h3>
+
+::: incremental
+- Instructions on the page!
+- Navigate to your repository on the local machine
+- Check with our favorite command
+:::
+
+::: fragment
+``` bash
+$ git status
+```
+:::
+
+
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub : Link the Local
+:::
+
+</h3>
+
+::: incremental
+- Copy paste the lines to the terminal and execute. We will discuss what these commands are in a moment.
+:::
+
+::: fragment
+``` bash
+$ git remote add origin https://github.com/<user>/<repository>.git
+$ git branch -M main
+$ git push -u origin main
+```
+:::
+
+::: fragment
+Now reload the site!
+
+::: 
+
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub : Link the Local
+:::
+
+</h3>
+
+::: fragment
+``` bash
+$ git remote add origin https://github.com/<user>/<repository>.git
+```
+:::
+
+::: fragment
+This command adds a reference to a remote repository which we named *origin*
+:::
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub : Link the Local
+:::
+
+</h3>
+::: fragment
+``` bash
+$ git branch -M main
+```
+:::
+
+::: fragment
+With this, we are creating a new *branch*. The -M option is technically a shortcut for two options: ```--move --force```
+:::
+
+::: incremental
+- ```--move```: Move/rename a branch
+- ```--force```: Resets a branch to start point, allows renaming when used with ```--move```.
+- Essentially we are overwriting any main branches on GitHub in this repository and pushing our changes there
+:::
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #56B4E9; padding: 10px;"}
+What is a Branch?
+:::
+
+</h3>
+
+![](images/brach-flow.svg)
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #56B4E9; padding: 10px;"}
+What is a Branch?
+:::
+
+</h3>
+
+-   A new/separate version of the main repository
+    -   You can make copies of the main file, work on them, etc without changing the main file itself
+    -   Remember our thing about raw data?
+    -   Someone else can fix an issue with a different part of the file while you work on another part
+    -   Git allows you to *merge* these
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #56B4E9; padding: 10px;"}
+More About Branches
+:::
+
+</h3>
+
+::: fragment
+You can issue the following command to make a branch IF you have an origin
+:::
+
+::: fragment
+``` bash
+$ git branch new_branch_name
+```
+:::
+
+<br />
+
+::: fragment
+After this, you can *checkout* the branch
+:::
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #56B4E9; padding: 10px;"}
+Branch: Git Checkout
+:::
+
+</h3>
+
+-   Lets you navigate between the branches created by `git branch`
+-   Updates files in your working directory to match the branch
+-   You can also create a branch directly with the checkout command:
+
+::: fragment
+``` bash
+$ git checkout -b new_branch_name
+```
+:::
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #56B4E9; padding: 10px;"}
+Branch: Git Checkout
+:::
+
+</h3>
+
+
+::: fragment
+Next, let us see what the status of our git environment is:
+:::
+
+::: fragment
+``` bash
+$ git status
+```
+:::
+
+::: fragment
+We can also list all of the branches:
+:::
+
+::: fragment
+``` bash
+$ git branch
+```
+:::
+
+
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #56B4E9; padding: 10px;"}
+Working with Branches
+:::
+
+</h3>
+
+::: fragment
+Create (or add) a new file to the directory
+::: 
+
+::: incremental
+- How do we add this to staging?
+- What *else* do we need to do?
+:::
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #56B4E9; padding: 10px;"}
+Working with Branches: Where are we?
+:::
+
+</h3>
+
+::: fragment
+View our log to see what is happening
+::: 
+
+::: fragment
+``` bash
+$  git log --all --graph --oneline
+```
+:::
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #56B4E9; padding: 10px;"}
+Working with Branches: Merge
+:::
+
+</h3>
+
+::: fragment
+If we think our changes are a good idea, we need to merge our branch back into the main, then clean it up (delete it)
+::: 
+
+::: fragment
+First we make sure we are on the branch we wish to merge *into*:
+
+:::
+
+::: fragment
+``` bash
+$  git branch
+```
+:::
+
+::: fragment
+Then we merge them
+
+:::
+
+::: fragment
+``` bash
+$  git merge <branch name>
+```
+:::
+
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #56B4E9; padding: 10px;"}
+Working with Branches: Merge Results
+:::
+
+</h3>
+
+::: fragment
+We can see everything that merged
+::: 
+
+::: fragment
+``` bash
+$ git branch --merged
+```
+:::
+
+##  {auto-animate="true"}
+
+<h3>
+
+::: {data-id="box" style="background: #56B4E9; padding: 10px;"}
+Working with Branches: Delete the Old Branch
+:::
+
+</h3>
+
+::: fragment
+``` bash
+$  git branch -d test1
+```
+:::
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub : Link the Local
+:::
+</h3>
+
+::: fragment
+From above (and what we just did): We need to *push* to the remote server
+:::
+
+::: fragment
+``` bash
+$ git push -u origin main
+```
+:::
+
+::: fragment
+This *pushes* our changes to the repository. The -u essentially adds a tracking reference that points to the upstream repository (what is the origin of your code)
+:::
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub : Link the Local
+:::
+</h3>
+
+
+::: incremental
+
+-   If we do not push, they simply sit in the staging area of our computer and do nothing
+-   We can push to our branch, or even another one (main)
+    -   This can be dangerous - you do *not* to write to main until you are ready!
+:::
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub : Push
+:::
+</h3>
+
+In this code the origin simply means to push the code to the repository you got it from; the branch_name is whatever branch you are pushing to
+
+- If we are the owner this will simply update our code.
+- If we are not, we can issue a *pull request*.
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub : Pull
+:::
+</h3>
+
+
+::: incremental
+- Create a new branch
+- Modify README
+- Add / commit
+- Switch to main
+- Push
+:::
+
+::: fragment
+``` bash
+$ git push origin <branch>
+```
+:::
+
+::: incremental
+
+- What do you see?
+:::
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub : Pull
+:::
+</h3>
+
+::: incremental
+- Copy the address in your status message
+- We will then create a *pull request*
+- We can review changes before allowing them into the code
+    - Add more information if you want, then click the green button
+- Now refresh the main repository page and we will finish this process    
+:::
+
+
+## Where We Are {auto-animate="true"}
+
+::: incremental
+
+-   We created a repository
+-   We created a branch
+-   We issued push / pull requests
+-   What about updating our local code from the origin?
+:::
+
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub : Local Pull Request
+:::
+</h3>
+
+::: incremental
+- Create a new file in your repository through the web interface
+- Now we need to pull that information back to our local repository
+- What branch should we be in?
+    - Try our branch....what happened?
+    - Now switch to main
+:::
+
+::: fragment
+``` bash
+$ git pull origin main
+```
+:::
+
+##  {auto-animate="true"}
+<h3>
+
+::: {data-id="box" style="background: #009E73; padding: 10px;"}
+GitHub : Local Pull Request
+:::
+</h3>
+
+::: fragment
+
+How do we update our branch with changes in main (or another branch?)
+:::
+
+::: incremental
+- We are using merge!
+- Checkout the branch
+- Merge with ```<branch_name>``` (in our case main)
+:::
+
+::: fragment
+``` bash
+$ git checkout <branch_name>
+$ git merge main
+$ git checkout
+$ git push origin <branch_name>
+
+```
+:::
+
+## Take a Mental Break! {auto-animate="true"}
+
+## While We Are At GitHub... {auto-animate="true"}
+
+Time to do things the easy way!
+
+::: incremental
+
+- Did it through the command line as it does not abstract the process
+- You now know what is going on; We can simplify things
+- We are going to go through git on GitHub / GitHub desktop
+:::
+
+## What About Remote Repositories? {auto-animate="true"}
+
+::: fragment
+There are lots of things out there that you may want to copy
+:::
+
+::: fragment
+- [https://github.com/lawdi/LAWD](https://github.com/lawdi/LAWD)
+- [https://github.com/SNAP-DRGN](https://github.com/SNAP-DRGN)
+- [https://github.com/AWMC/geodata](https://github.com/AWMC/geodata)
+- [https://github.com/recogito](https://github.com/recogito)
+- [https://github.com/pelagios](https://github.com/pelagios)
+- [https://github.com/LinkedPasts](https://github.com/LinkedPasts)
+- [https://github.com/isawnyu/pleiades-gazetteer](https://github.com/isawnyu/pleiades-gazetteer)
+- [https://github.com/WorldHistoricalGazetteer](https://github.com/WorldHistoricalGazetteer)
+:::
+
+##
+![](images/cdo-git_clone_vs_fork-f.png)
+
+
+
+## Clones, Forks, and You {auto-animate="true"}
+
+- Would you clone or fork the repository for this workshop?
+- Why?
+
+
+## Now Clone an Existing Repository {auto-animate="true"}
+
+::: columns
+::: {.column width="50%"}
+
+::: incremental
+- Makes a local copy of a repository on your machine
+- You can pull changes
+- You can make pull requests 
+- Does not impact the original repository
+- Hopefully a better time than Episode 2!
+:::
+:::
+
+::: {.column width="50%"}
+![](images/clones.png){width="80%"}
+:::
+:::
+
+## Attack of the Clones! {auto-animate="true"}
+::: incremental
+- Navigate to where you want the new code; you do NOT have to make a new directory!
+- Go to the workshop repository: [https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Workshop-2024](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Workshop-2024)
+- Click on the green "code" button 
+- Copy the code
+- type ```git clone``` and paste in your terminal
+:::
+
+
+## Forking in GitHub {auto-animate="true"}
+
+::: columns
+::: {.column width="50%"}
+
+::: incremental
+- Easy to do with the web interface
+- *YOUR* own copy of a repository; you say what gets pushed in, etc 
+- Does not impact the original repository
+- Back to GitHub!
+:::
+:::
+
+::: {.column width="50%"}
+![](images/forky.png){width="80%"}
+:::
+:::
+
+
+## Even More Tools! {auto-animate="true"}
+
+::: incremental
+::: columns
+::: {.column width="50%"}
+-   Keep a DH lab notebook!
+    -   Different technologies contain ideas and code in one place
+    -   I use VS Code + Zotero + Quarto
+    -   Integrates **directly** into GitHub
+:::
+
+::: {.column width="50%"}
+![](images/pubpipe.png)
+:::
+:::
+:::
+
+## This Was a Lot! {.smaller auto-animate="true"}
+
+::: incremental
+
+-   You did it!
+-   This is a technical process that is not *strictly necessary* for DH work
+-   HOWEVER, this is the *sine qua non* of collaborating with data and code
+-   Also a great way to structure writing; all of my academic writing is now done with this process
+-   Also sometimes necessary for getting *your* web pages, writing, etc out there
+    -   We will go over this later!
+    -   Don't forget - you want to *communicate* your wonderful DH work
+    -   Also want to impress / sell your skills on the job market
+
+:::

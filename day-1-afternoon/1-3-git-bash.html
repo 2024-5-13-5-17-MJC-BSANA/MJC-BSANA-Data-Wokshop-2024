@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="1-3-git-bash_files/libs/clipboard/clipboard.min.js"></script>
+<script src="1-3-git-bash_files/libs/quarto-html/tabby.min.js"></script>
+<script src="1-3-git-bash_files/libs/quarto-html/popper.min.js"></script>
+<script src="1-3-git-bash_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="1-3-git-bash_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="1-3-git-bash_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="1-3-git-bash_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="1-3-git-bash_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="1-3-git-bash_files/libs/quarto-contrib/videojs/video.min.js"></script>
+<link href="1-3-git-bash_files/libs/quarto-contrib/videojs/video-js.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.4.553">
+
+  <meta name="author" content="Ryan Horne   UCLA OARC   rmhorne@ucla.edu  Twitter: @RyanMHorne">
+  <title>1.2: Git and Version Control</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="1-3-git-bash_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="1-3-git-bash_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="1-3-git-bash_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="1-3-git-bash_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="1-3-git-bash_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="1-3-git-bash_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="1-3-git-bash_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-dark">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" data-background-color="#005c96" data-background-position="100% 100%" data-background-size="6%" class="quarto-title-block center">
+  <h1 class="title">1.2: Git and Version Control</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+<b>Ryan Horne</b> <br> UCLA OARC <br> rmhorne@ucla.edu <br>Twitter: <span class="citation" data-cites="RyanMHorne">@RyanMHorne</span> 
+</div>
+</div>
+</div>
+
+</section>
+<section id="intro" class="slide level2">
+<h2>Intro</h2>
+<p>Today we will be looking at Version control using Git, Bash, and GitHub. If you have not done so already, you need to install Git and create an account on GitHub. This part of the workshop is adapted from data carpentries; if you want more details I recommend starting there.</p>
+</section>
+<section id="agenda" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Agenda</h2>
+<p>We will:</p>
+<div>
+<ul>
+<li class="fragment">Continue a little about project structure</li>
+<li class="fragment">Talk about bash and Git</li>
+<li class="fragment">Run Git from the command line</li>
+<li class="fragment">Setup GitHub account</li>
+<li class="fragment">Fork a repository</li>
+</ul>
+</div>
+</section>
+<section id="quick-side-note" class="slide level2">
+<h2>Quick Side Note</h2>
+<p>The color palette that I am using was developed by Masataka Okabe (Jikei Medical School) and Kei Ito (University of Tokyo). It is colorblind friendly and is under the recommended MAXIMUM of 8 categories. See <a href="https://siegal.bio.nyu.edu/color-palette/" class="uri">https://siegal.bio.nyu.edu/color-palette/</a>.</p>
+</section>
+<section id="what-do-you-do" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">What do YOU do?</h2>
+<p>Unmute or on chat, tell us!</p>
+<div>
+<ul>
+<li class="fragment">How do you organize your projects now?
+<ul>
+<li class="fragment">Yes, your writing is a project!</li>
+</ul></li>
+<li class="fragment">How do you collaborate with others?
+<ul>
+<li class="fragment">What programs do you use, if any?</li>
+<li class="fragment">Do you have shared drives? Documents?</li>
+</ul></li>
+<li class="fragment">How much thought do you put into the organization and mechanics of your digital projects?</li>
+</ul>
+</div>
+</section>
+<section id="so-you-want-to-make-a-dh-project" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">So, You Want to Make a DH Project</h2>
+<div>
+<ul>
+<li class="fragment">Does your file structure and naming make sense?</li>
+<li class="fragment">Is your raw data separate from what you are working on?</li>
+</ul>
+</div>
+</section>
+<section id="some-basic-organizational-points" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Some Basic Organizational Points</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Keep raw data in a separate directory from your working data</li>
+</ul>
+<div>
+<ul>
+<li class="fragment"><strong>DO NOT TOUCH IT</strong>
+<ul>
+<li class="fragment">Copy it, <em>then</em> open it
+<ul>
+<li class="fragment">Programs <em>can</em> modify your data just by opening it!</li>
+</ul></li>
+<li class="fragment">If in doubt, look above</li>
+</ul></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/rawdatachange.jpg" style="width:80.0%"></p>
+</div>
+</div>
+</section>
+<section id="so-you-want-to-make-a-dh-project-part-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">So, You Want to Make a DH Project Part 2</h2>
+<div>
+<ul>
+<li class="fragment">Does your file structure and naming make sense?</li>
+<li class="fragment">Is your raw data separate from what you are working on?</li>
+<li class="fragment">Is your README up to speed?</li>
+<li class="fragment">Wait a second…..</li>
+</ul>
+</div>
+</section>
+<section id="why-a-readme" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Why a README?</h2>
+<div>
+<ul>
+<li class="fragment">First rule of DH: Document, document, document</li>
+<li class="fragment">Second rule of DH: Document, document, document</li>
+<li class="fragment">Seriously…</li>
+<li class="fragment">Document, document, document</li>
+<li class="fragment">A README file can save <strong>you</strong> countless hours, let alone any collaborators</li>
+</ul>
+</div>
+</section>
+<section id="what-is-a-readme" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">What is a README?</h2>
+<div>
+<ul>
+<li class="fragment">You should <strong><em>ALWAYS</em></strong> have a README.md file. <strong><em>ALWAYS!!!!</em></strong>
+<ul>
+<li class="fragment">Think of this as a love letter to yourself. Do you remember everything about your data? Columns? Abbreviations? What you had for breakfast?</li>
+<li class="fragment">Where did you get your data form? What were the data formats? What did you do to it? Etc.</li>
+</ul></li>
+<li class="fragment">Some great templates out there (I linked to UCSB Research Data Services one)</li>
+<li class="fragment">There might be field specific things that you need
+<ul>
+<li class="fragment">If so, best practice to make some blank README files as templates, then copy over and modify as needed</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="how-to-do-a-readme" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">How to do a README?</h2>
+
+<img data-src="images/readme-template.png" class="r-stretch quarto-figure-center"><p class="caption">https://doi.org/10.5281/zenodo.10828379</p></section>
+<section id="time-to-do-dh" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Time to do DH!</h2>
+<div class="fragment">
+<p>Now we are ready to do some serious Digital Humanities!</p>
+</div>
+<p><br> <br></p>
+<div class="fragment">
+<p>However…..</p>
+</div>
+</section>
+<section id="what-we-probably-want-to-avoid" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">What We (Probably) Want to Avoid</h2>
+
+<img data-src="images/file-structure-messydesktop.jpg" class="r-stretch quarto-figure-center"><p class="caption">From MIT Broad Research Communication Lab</p></section>
+<section id="one-problem" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">One Problem</h2>
+<p><img data-src="images/phd101212s.png" class="absolute" style="top: 55px; right: 30%; "></p>
+</section>
+<section id="another-problem" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Another Problem</h2>
+<video id="video_shortcode_videojs_video1" height="600" class="video-js vjs-default-skin " controls="" preload="auto" data-setup="{}" title=""><source src="images/homer.mp4"></video>
+</section>
+<section id="yet-another-problem" class="slide level2">
+<h2>Yet Another Problem</h2>
+
+<img data-src="images/cofcomp.jpg" class="r-stretch"></section>
+<section id="what-is-the-worst-that-can-happen-with-this-mess" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">What is the Worst that Can Happen With This Mess?</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/q0POXW4V1_k?start=006" width="85%" height="85%" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section>
+<section id="seriously-though---our-issues" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Seriously Though - Our Issues</h2>
+<div>
+<ul>
+<li class="fragment">How do you keep track of changes, modifications, etc?
+<ul>
+<li class="fragment">How can you roll things back to a previous state?</li>
+<li class="fragment">How can you recover from a spilled coffee mug?</li>
+<li class="fragment">How do you recapture that wonderful paragraph that is <em>waaaaay</em> past undo?</li>
+<li class="fragment">How do you effectively collaborate?</li>
+<li class="fragment">How do you share your data and findings?</li>
+<li class="fragment">How can you setup free web space?</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="version-control" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Version Control</h2>
+<div>
+<ul>
+<li class="fragment">Basic idea: track changes in a file / directory
+<ul>
+<li class="fragment">Also to reconcile different versions of a file</li>
+<li class="fragment">There is some functionality for this built into Word and Google Docs</li>
+</ul></li>
+<li class="fragment">Think of changes as separate from the document / file
+<ul>
+<li class="fragment">This is a common theme in the workshop: <u><strong><em>presentation and data are different</em></strong></u></li>
+</ul></li>
+<li class="fragment">Helps with project organization, reusability, reproducibility, and portability</li>
+</ul>
+</div>
+</section>
+<section id="basic-functionality" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Basic Functionality</h2>
+
+<img data-src="images/play-changes.svg" class="r-stretch"></section>
+<section id="multiple-users" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Multiple Users</h2>
+<p><img data-src="images/merge.svg" class="absolute" style="top: 55px; right: 30%; "></p>
+</section>
+<section id="git" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Git</h2>
+
+<img data-src="images/git-main.png" class="r-stretch"></section>
+<section id="git-1" class="slide level2 smaller">
+<h2>Git</h2>
+<div>
+<ul>
+<li class="fragment">First made in 2005 to track development of Linux kernel</li>
+<li class="fragment">Free and open source distributed version control system</li>
+<li class="fragment">~ 95% of developers reporting it as their primary version control system as of 2022</li>
+<li class="fragment">You can use it for all kinds of computer files</li>
+<li class="fragment">Small and lightweight</li>
+<li class="fragment">Command line and applications
+<ul>
+<li class="fragment">Deployments in GitHub, SourceForge, Bitbucket and GitLab</li>
+</ul></li>
+<li class="fragment">We are going to learn things the hard way, then shift to the easy way</li>
+</ul>
+</div>
+</section>
+<section id="time-for-the-command-line" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Time For the Command Line!</h2>
+<p><img data-src="images/do_not_fear_command_line.png" class="absolute" style="top: 55px; right: 30%; "></p>
+</section>
+<section id="get-started-the-command-line" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Get Started: The Command Line</h2>
+<div>
+<ul>
+<li class="fragment"><p>Terminal for mac</p></li>
+<li class="fragment"><p>Command line for windows</p></li>
+<li class="fragment"><p>Using the same account info as your GitHub account, you configure Git by typing in the following:</p></li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb1-1" class="hljs-ln-code"><a href=""></a>    <span class="ex">$</span> git config <span class="at">--global</span> user.name <span class="st">"Vlad Dracula"</span></span>
+<span id="cb1-2" class="hljs-ln-code"><a href=""></a>    <span class="ex">$</span> git config <span class="at">--global</span> user.email <span class="st">"vlad@tran.sylvan.ia"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li class="fragment">If you elect to use a private email address with GitHub, then use that same email address for the user.email value, e.g.&nbsp;<em>username@users.noreply.github.com</em> replacing username with your GitHub one.</li>
+</ul>
+</div>
+</section>
+<section id="more-configurations" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">More Configurations</h2>
+<p>We will be using VS Code as our example; we set this with the following command:</p>
+<div class="fragment">
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb2-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git config <span class="at">--global</span> core.editor <span class="st">"code --wait"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="name-the-default-branch" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Name the Default Branch</h2>
+<p>Now we will set Git to use the name “main” for default branches. More on branches later….</p>
+<div class="fragment">
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb3-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git config <span class="at">--global</span> init.defaultBranch main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p><br> Historical note: <br> You may encounter <code>master</code> instead of main in documentation, files, projects, etc. This was very problematic as a naming convention, and so many of us are switching to <code>main</code>.</p>
+</div>
+</section>
+<section id="see-our-configurations" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">See Our Configurations</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb4-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git config <span class="at">--list</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="help" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Help!</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb5-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git config <span class="at">-h</span></span>
+<span id="cb5-2" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git config <span class="at">--help</span></span>
+<span id="cb5-3" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git help</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br> <br></p>
+<div class="fragment">
+<p>Now we are ready to use Git!</p>
+</div>
+</section>
+<section id="basic-idea" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Basic Idea</h2>
+
+<img data-src="images/git-staging-area.svg" class="r-stretch"></section>
+<section id="git-overview" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Git Overview</h2>
+
+<img data-src="images/git-overview.svg" class="r-stretch"></section>
+<section id="git-overview-1" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Git Overview</h2>
+<div data-id="box" style="background: #CC79A7; padding: 8px;">
+<p>Create</p>
+</div>
+<div data-id="box" style="background: #0072B2; padding: 8px;">
+<p>Git Add</p>
+</div>
+<div data-id="box" style="background: #F0E442; padding: 8px;">
+<p>Git Commit</p>
+</div>
+<div data-id="box" style="background: #009E73; padding: 8px;">
+<p>GitHub</p>
+</div>
+<div data-id="box" style="background: #56B4E9; padding: 8px;">
+<p>Branch</p>
+</div>
+<div data-id="box" style="background: #E69F00; padding: 8px;">
+<p>Pull Request</p>
+</div>
+</section>
+<section id="section" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #CC79A7; padding: 10px;">
+<p>Create</p>
+</div>
+</h3>
+<div class="fragment">
+<p>First step: Are we making something new or cloning?</p>
+</div>
+<div>
+<ul>
+<li class="fragment">If it is cloning, then clone in a working directory that makes sense
+<ul>
+<li class="fragment">Cloning makes a <em>local</em> copy of a repository</li>
+<li class="fragment">Still has references to that repository</li>
+<li class="fragment">Might not be owned by you</li>
+</ul></li>
+<li class="fragment">If we are creating something new, then we can create it directly on the local machine OR create a new remote repository
+<ul>
+<li class="fragment">We will start by making something local</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="section-1" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #CC79A7; padding: 10px;">
+<p>Create</p>
+</div>
+</h3>
+<div>
+<ul>
+<li class="fragment">First, navigate to a place where you can put files. The <em>Desktop</em> can be a good choice; <em>Documents</em> or some other directory is probably better.</li>
+<li class="fragment">Once there, let’s make a directory and go into it</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb6-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> cd ~/Desktop</span>
+<span id="cb6-2" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> mkdir bsana2024</span>
+<span id="cb6-3" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> cd bsana2024</span>
+<span id="cb6-4" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-2" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #CC79A7; padding: 10px;">
+<p>Create</p>
+</div>
+</h3>
+<div class="fragment">
+<p>Now we need to create the empty repository for git</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href=""></a><span class="ex">$</span> git init</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>Now list the directory</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href=""></a><span class="ex">$</span> ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-3" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #CC79A7; padding: 10px;">
+<p>Create</p>
+</div>
+</h3>
+<div class="fragment">
+<p>We do not see anything in the directory…but it is hidden</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb9-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> ls <span class="at">-a</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-4" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #CC79A7; padding: 10px;">
+<p>Create</p>
+</div>
+</h3>
+<p>We Need a README.md!</p>
+<div>
+<ul>
+<li class="fragment">Grab it from what we saw before: <a href="https://doi.org/10.5281/zenodo.10828379" class="uri">https://doi.org/10.5281/zenodo.10828379</a></li>
+<li class="fragment">Open it in your favorite text editor (or <em>Visual Studio Code</em>)</li>
+<li class="fragment">Make some modifications to the file!</li>
+</ul>
+</div>
+</section>
+<section id="section-5" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #0072B2; padding: 10px;">
+<p>Git Add</p>
+</div>
+</h3>
+<p>Tell Git What is Going On</p>
+<div>
+<ul>
+<li class="fragment">Just adding a file is not enough for the command line; now we need to tell Git it is there</li>
+<li class="fragment">This is done with the <code>git add</code> command</li>
+</ul>
+</div>
+</section>
+<section id="section-6" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #0072B2; padding: 10px;">
+<p>Git Add</p>
+</div>
+</h3>
+<p>This ensures that your files are now seen by Git. This allows you to experiment with data, etc and only add it to be tracked when you are ready to do so.</p>
+<div class="fragment">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb10-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git add file_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>Now we need to tell Git what we did</p>
+</div>
+</section>
+<section id="section-7" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #F0E442; padding: 10px;">
+<p>Git Commit</p>
+</div>
+</h3>
+
+<img data-src="images/git-committing.svg" class="r-stretch"></section>
+<section id="section-8" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #F0E442; padding: 10px;">
+<p>Git Commit</p>
+</div>
+</h3>
+<div>
+<ul>
+<li class="fragment">Think of a commit point as a “save point”</li>
+<li class="fragment">Git tracks changes <em>BETWEEN</em> commits</li>
+<li class="fragment">You should <em>always</em> include a message on commits
+<ul>
+<li class="fragment">Remember what we should do in DH projects?</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb11-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git commit <span class="at">-m</span> <span class="st">"valuable_but_short_message_here"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-9" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #F0E442; padding: 10px;">
+<p>Git Commit</p>
+</div>
+</h3>
+<p>What did we do? Let’s check!</p>
+<div class="fragment">
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb12-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-10" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #F0E442; padding: 10px;">
+<p>Git Commit</p>
+</div>
+</h3>
+<p>Let’s see the history about this commit</p>
+<div class="fragment">
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb13-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-11" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #F0E442; padding: 10px;">
+<p>Git Commit</p>
+</div>
+</h3>
+<p>Quick exercise: Can you add a directory with files into the repository?</p>
+</section>
+<section id="section-12" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #F0E442; padding: 10px;">
+<p>Git Commit</p>
+</div>
+</h3>
+<p>What about files I do <em>not</em> want?</p>
+<div>
+<ul>
+<li class="fragment">If I am adding directories</li>
+<li class="fragment">Files that are huge, there for testing, etc</li>
+<li class="fragment">Also hidden system files</li>
+<li class="fragment">This is the <code>.gitignore</code> file</li>
+<li class="fragment">Create a <code>.gitignore</code> file, another text file, then add the name of the file to <code>.gitignore</code>.</li>
+</ul>
+</div>
+</section>
+<section id="section-13" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #F0E442; padding: 10px;">
+<p>Git Commit</p>
+</div>
+</h3>
+<div class="fragment">
+<p>What if we want to <em>revert</em> a commit?</p>
+</div>
+<div class="fragment">
+<p>First, let’s list our commits</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href=""></a><span class="ex">$</span> git log <span class="at">--oneline</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>Then find the one we want and revert it</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href=""></a><span class="ex">$</span> git revert id</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-14" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub</p>
+</div>
+</h3>
+<p>Now What?</p>
+<div class="fragment">
+<p>We setup a local repository, everything is going smoothly. We now want to:</p>
+</div>
+<div>
+<ul>
+<li class="fragment">Backup our repository</li>
+<li class="fragment">Be able to access / change / contribute to our work from anywhere</li>
+<li class="fragment">Show the world if we want to</li>
+</ul>
+</div>
+<div class="fragment">
+<div data-id="box">
+<p>We need a remote repository server. The most used / famous is GitHub</p>
+</div>
+</div>
+</section>
+<section id="section-15" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub</p>
+</div>
+</h3>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div>
+<ul>
+<li class="fragment">GitHub is a for-profit service that hosts remote git repositories</li>
+<li class="fragment">HTML interface</li>
+<li class="fragment">Does lots of things easily</li>
+<li class="fragment">Free service for many projects (public <em>and</em> private!)</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/github-mark.svg" style="width:80.0%"></p>
+</div>
+</div>
+</section>
+<section id="section-16" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub</p>
+</div>
+</h3>
+<div>
+<ul>
+<li class="fragment">Create a new repository on GitHub</li>
+<li class="fragment">Link Our local repository</li>
+<li class="fragment">Get changes from GitHub to our local repository</li>
+</ul>
+</div>
+</section>
+<section id="section-17" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub : New Repository</p>
+</div>
+</h3>
+<div>
+<ul>
+<li class="fragment">Login</li>
+<li class="fragment">Click on “Repositories”</li>
+<li class="fragment">Click on the green button “New”</li>
+<li class="fragment">WAIT before going further!</li>
+</ul>
+</div>
+</section>
+<section id="section-18" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub : Link the Local</p>
+</div>
+</h3>
+<div>
+<ul>
+<li class="fragment">Instructions on the page!</li>
+<li class="fragment">Navigate to your repository on the local machine</li>
+<li class="fragment">Check with our favorite command</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb16-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-19" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub : Link the Local</p>
+</div>
+</h3>
+<div>
+<ul>
+<li class="fragment">Copy paste the lines to the terminal and execute. We will discuss what these commands are in a moment.</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb17-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git remote add origin https://github.com/<span class="op">&lt;</span>user<span class="op">&gt;</span>/<span class="op">&lt;</span>repository<span class="op">&gt;</span>.git</span>
+<span id="cb17-2" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git branch <span class="at">-M</span> main</span>
+<span id="cb17-3" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git push <span class="at">-u</span> origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>Now reload the site!</p>
+</div>
+</section>
+<section id="section-20" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub : Link the Local</p>
+</div>
+</h3>
+<div class="fragment">
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb18-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git remote add origin https://github.com/<span class="op">&lt;</span>user<span class="op">&gt;</span>/<span class="op">&lt;</span>repository<span class="op">&gt;</span>.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>This command adds a reference to a remote repository which we named <em>origin</em></p>
+</div>
+</section>
+<section id="section-21" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub : Link the Local</p>
+</div>
+</h3>
+<div class="fragment">
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb19-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git branch <span class="at">-M</span> main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>With this, we are creating a new <em>branch</em>. The -M option is technically a shortcut for two options: <code>--move --force</code></p>
+</div>
+<div>
+<ul>
+<li class="fragment"><code>--move</code>: Move/rename a branch</li>
+<li class="fragment"><code>--force</code>: Resets a branch to start point, allows renaming when used with <code>--move</code>.</li>
+<li class="fragment">Essentially we are overwriting any main branches on GitHub in this repository and pushing our changes there</li>
+</ul>
+</div>
+</section>
+<section id="section-22" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #56B4E9; padding: 10px;">
+<p>What is a Branch?</p>
+</div>
+</h3>
+
+<img data-src="images/brach-flow.svg" class="r-stretch"></section>
+<section id="section-23" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #56B4E9; padding: 10px;">
+<p>What is a Branch?</p>
+</div>
+</h3>
+<ul>
+<li>A new/separate version of the main repository
+<ul>
+<li>You can make copies of the main file, work on them, etc without changing the main file itself</li>
+<li>Remember our thing about raw data?</li>
+<li>Someone else can fix an issue with a different part of the file while you work on another part</li>
+<li>Git allows you to <em>merge</em> these</li>
+</ul></li>
+</ul>
+</section>
+<section id="section-24" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #56B4E9; padding: 10px;">
+<p>More About Branches</p>
+</div>
+</h3>
+<div class="fragment">
+<p>You can issue the following command to make a branch IF you have an origin</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb20-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git branch new_branch_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<div class="fragment">
+<p>After this, you can <em>checkout</em> the branch</p>
+</div>
+</section>
+<section id="section-25" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #56B4E9; padding: 10px;">
+<p>Branch: Git Checkout</p>
+</div>
+</h3>
+<ul>
+<li>Lets you navigate between the branches created by <code>git branch</code></li>
+<li>Updates files in your working directory to match the branch</li>
+<li>You can also create a branch directly with the checkout command:</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb21"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb21-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git checkout <span class="at">-b</span> new_branch_name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-26" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #56B4E9; padding: 10px;">
+<p>Branch: Git Checkout</p>
+</div>
+</h3>
+<div class="fragment">
+<p>Next, let us see what the status of our git environment is:</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href=""></a><span class="ex">$</span> git status</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>We can also list all of the branches:</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href=""></a><span class="ex">$</span> git branch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-27" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #56B4E9; padding: 10px;">
+<p>Working with Branches</p>
+</div>
+</h3>
+<div class="fragment">
+<p>Create (or add) a new file to the directory</p>
+</div>
+<div>
+<ul>
+<li class="fragment">How do we add this to staging?</li>
+<li class="fragment">What <em>else</em> do we need to do?</li>
+</ul>
+</div>
+</section>
+<section id="section-28" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #56B4E9; padding: 10px;">
+<p>Working with Branches: Where are we?</p>
+</div>
+</h3>
+<div class="fragment">
+<p>View our log to see what is happening</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb24-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span>  git log <span class="at">--all</span> <span class="at">--graph</span> <span class="at">--oneline</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-29" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #56B4E9; padding: 10px;">
+<p>Working with Branches: Merge</p>
+</div>
+</h3>
+<div class="fragment">
+<p>If we think our changes are a good idea, we need to merge our branch back into the main, then clean it up (delete it)</p>
+</div>
+<div class="fragment">
+<p>First we make sure we are on the branch we wish to merge <em>into</em>:</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href=""></a><span class="ex">$</span>  git branch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>Then we merge them</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb26"><pre class="sourceCode numberSource bash number-lines code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href=""></a><span class="ex">$</span>  git merge <span class="op">&lt;</span>branch name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-30" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #56B4E9; padding: 10px;">
+<p>Working with Branches: Merge Results</p>
+</div>
+</h3>
+<div class="fragment">
+<p>We can see everything that merged</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb27-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git branch <span class="at">--merged</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-31" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #56B4E9; padding: 10px;">
+<p>Working with Branches: Delete the Old Branch</p>
+</div>
+</h3>
+<div class="fragment">
+<div class="sourceCode" id="cb28"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb28-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span>  git branch <span class="at">-d</span> test1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-32" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub : Link the Local</p>
+</div>
+</h3>
+<div class="fragment">
+<p>From above (and what we just did): We need to <em>push</em> to the remote server</p>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb29"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb29-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git push <span class="at">-u</span> origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<p>This <em>pushes</em> our changes to the repository. The -u essentially adds a tracking reference that points to the upstream repository (what is the origin of your code)</p>
+</div>
+</section>
+<section id="section-33" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub : Link the Local</p>
+</div>
+</h3>
+<div>
+<ul>
+<li class="fragment">If we do not push, they simply sit in the staging area of our computer and do nothing</li>
+<li class="fragment">We can push to our branch, or even another one (main)
+<ul>
+<li class="fragment">This can be dangerous - you do <em>not</em> to write to main until you are ready!</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="section-34" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub : Push</p>
+</div>
+</h3>
+<p>In this code the origin simply means to push the code to the repository you got it from; the branch_name is whatever branch you are pushing to</p>
+<ul>
+<li>If we are the owner this will simply update our code.</li>
+<li>If we are not, we can issue a <em>pull request</em>.</li>
+</ul>
+</section>
+<section id="section-35" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub : Pull</p>
+</div>
+</h3>
+<div>
+<ul>
+<li class="fragment">Create a new branch</li>
+<li class="fragment">Modify README</li>
+<li class="fragment">Add / commit</li>
+<li class="fragment">Switch to main</li>
+<li class="fragment">Push</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb30"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb30-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git push origin <span class="op">&lt;</span>branch<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div>
+<ul>
+<li class="fragment">What do you see?</li>
+</ul>
+</div>
+</section>
+<section id="section-36" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub : Pull</p>
+</div>
+</h3>
+<div>
+<ul>
+<li class="fragment">Copy the address in your status message</li>
+<li class="fragment">We will then create a <em>pull request</em></li>
+<li class="fragment">We can review changes before allowing them into the code
+<ul>
+<li class="fragment">Add more information if you want, then click the green button</li>
+</ul></li>
+<li class="fragment">Now refresh the main repository page and we will finish this process<br>
+</li>
+</ul>
+</div>
+</section>
+<section id="where-we-are" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Where We Are</h2>
+<div>
+<ul>
+<li class="fragment">We created a repository</li>
+<li class="fragment">We created a branch</li>
+<li class="fragment">We issued push / pull requests</li>
+<li class="fragment">What about updating our local code from the origin?</li>
+</ul>
+</div>
+</section>
+<section id="section-37" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub : Local Pull Request</p>
+</div>
+</h3>
+<div>
+<ul>
+<li class="fragment">Create a new file in your repository through the web interface</li>
+<li class="fragment">Now we need to pull that information back to our local repository</li>
+<li class="fragment">What branch should we be in?
+<ul>
+<li class="fragment">Try our branch….what happened?</li>
+<li class="fragment">Now switch to main</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb31"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb31-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git pull origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="section-38" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title"></h2>
+<h3>
+<div data-id="box" style="background: #009E73; padding: 10px;">
+<p>GitHub : Local Pull Request</p>
+</div>
+</h3>
+<div class="fragment">
+<p>How do we update our branch with changes in main (or another branch?)</p>
+</div>
+<div>
+<ul>
+<li class="fragment">We are using merge!</li>
+<li class="fragment">Checkout the branch</li>
+<li class="fragment">Merge with <code>&lt;branch_name&gt;</code> (in our case main)</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="sourceCode" id="cb32"><pre class="sourceCode numberSource bash number-lines code-with-copy" data-id="quarto-animate-code"><code class="sourceCode bash hljs"><span id="cb32-1" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git checkout <span class="op">&lt;</span>branch_name<span class="op">&gt;</span></span>
+<span id="cb32-2" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git merge main</span>
+<span id="cb32-3" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git checkout</span>
+<span id="cb32-4" class="hljs-ln-code"><a href=""></a><span class="ex">$</span> git push origin <span class="op">&lt;</span>branch_name<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="take-a-mental-break" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Take a Mental Break!</h2>
+</section>
+<section id="while-we-are-at-github" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">While We Are At GitHub…</h2>
+<p>Time to do things the easy way!</p>
+<div>
+<ul>
+<li class="fragment">Did it through the command line as it does not abstract the process</li>
+<li class="fragment">You now know what is going on; We can simplify things</li>
+<li class="fragment">We are going to go through git on GitHub / GitHub desktop</li>
+</ul>
+</div>
+</section>
+<section id="what-about-remote-repositories" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">What About Remote Repositories?</h2>
+<div class="fragment">
+<p>There are lots of things out there that you may want to copy</p>
+</div>
+<div class="fragment">
+<ul>
+<li><a href="https://github.com/lawdi/LAWD">https://github.com/lawdi/LAWD</a></li>
+<li><a href="https://github.com/SNAP-DRGN">https://github.com/SNAP-DRGN</a></li>
+<li><a href="https://github.com/AWMC/geodata">https://github.com/AWMC/geodata</a></li>
+<li><a href="https://github.com/recogito">https://github.com/recogito</a></li>
+<li><a href="https://github.com/pelagios">https://github.com/pelagios</a></li>
+<li><a href="https://github.com/LinkedPasts">https://github.com/LinkedPasts</a></li>
+<li><a href="https://github.com/isawnyu/pleiades-gazetteer">https://github.com/isawnyu/pleiades-gazetteer</a></li>
+<li><a href="https://github.com/WorldHistoricalGazetteer">https://github.com/WorldHistoricalGazetteer</a></li>
+</ul>
+</div>
+</section>
+<section id="section-39" class="slide level2">
+<h2></h2>
+
+<img data-src="images/cdo-git_clone_vs_fork-f.png" class="r-stretch"></section>
+<section id="clones-forks-and-you" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Clones, Forks, and You</h2>
+<ul>
+<li>Would you clone or fork the repository for this workshop?</li>
+<li>Why?</li>
+</ul>
+</section>
+<section id="now-clone-an-existing-repository" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Now Clone an Existing Repository</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div>
+<ul>
+<li class="fragment">Makes a local copy of a repository on your machine</li>
+<li class="fragment">You can pull changes</li>
+<li class="fragment">You can make pull requests</li>
+<li class="fragment">Does not impact the original repository</li>
+<li class="fragment">Hopefully a better time than Episode 2!</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/clones.png" style="width:80.0%"></p>
+</div>
+</div>
+</section>
+<section id="attack-of-the-clones" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Attack of the Clones!</h2>
+<div>
+<ul>
+<li class="fragment">Navigate to where you want the new code; you do NOT have to make a new directory!</li>
+<li class="fragment">Go to the workshop repository: <a href="https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Workshop-2024">https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Workshop-2024</a></li>
+<li class="fragment">Click on the green “code” button</li>
+<li class="fragment">Copy the code</li>
+<li class="fragment">type <code>git clone</code> and paste in your terminal</li>
+</ul>
+</div>
+</section>
+<section id="forking-in-github" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Forking in GitHub</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div>
+<ul>
+<li class="fragment">Easy to do with the web interface</li>
+<li class="fragment"><em>YOUR</em> own copy of a repository; you say what gets pushed in, etc</li>
+<li class="fragment">Does not impact the original repository</li>
+<li class="fragment">Back to GitHub!</li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/forky.png" style="width:80.0%"></p>
+</div>
+</div>
+</section>
+<section id="even-more-tools" class="slide level2" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">Even More Tools!</h2>
+<div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment">Keep a DH lab notebook!
+<ul>
+<li class="fragment">Different technologies contain ideas and code in one place</li>
+<li class="fragment">I use VS Code + Zotero + Quarto</li>
+<li class="fragment">Integrates <strong>directly</strong> into GitHub</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/pubpipe.png"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="this-was-a-lot" class="slide level2 smaller" data-auto-animate="true">
+<h2 data-id="quarto-animate-title">This Was a Lot!</h2>
+<div>
+<ul>
+<li class="fragment">You did it!</li>
+<li class="fragment">This is a technical process that is not <em>strictly necessary</em> for DH work</li>
+<li class="fragment">HOWEVER, this is the <em>sine qua non</em> of collaborating with data and code</li>
+<li class="fragment">Also a great way to structure writing; all of my academic writing is now done with this process</li>
+<li class="fragment">Also sometimes necessary for getting <em>your</em> web pages, writing, etc out there
+<ul>
+<li class="fragment">We will go over this later!</li>
+<li class="fragment">Don’t forget - you want to <em>communicate</em> your wonderful DH work</li>
+<li class="fragment">Also want to impress / sell your skills on the job market</li>
+</ul></li>
+</ul>
+</div>
+<div class="quarto-auto-generated-content">
+<p><img src="images/CC_BY-SA_icon.svg" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="1-3-git-bash_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="1-3-git-bash_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="1-3-git-bash_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="1-3-git-bash_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="1-3-git-bash_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="1-3-git-bash_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="1-3-git-bash_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="1-3-git-bash_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="1-3-git-bash_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="1-3-git-bash_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    <script>videojs(video_shortcode_videojs_video1);</script>
+    
+
+</body></html>
