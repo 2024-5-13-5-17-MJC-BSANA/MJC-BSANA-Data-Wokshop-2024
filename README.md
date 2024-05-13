@@ -7,17 +7,17 @@ In this week-long workshop, led by Paula Loreto Granados García (EMKP, The Brit
   - [Morning Session: What is a database? Best practices for recording and managing data ](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Wokshop-2024/wiki/Monday-Morning-Session-1:-What-is-a-Database%3F/)
   - [Afternoon Session: Git and Version Control](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Workshop-2024/wiki/Monday-Afternoon-Session-1:-Git-and-Version-Control)
     
-- **Tuesday**, May 14, 2024, 10:00 am–3:30 pm (EDT), including lunch break and lab time: Data Acquisition and Network Analysis. Data sources and repositories. Data extraction. Clean and manage datasets with OpenRefine. The basics of social network analysis. Use Cytoscape and Gephi to construct and visualize a network based on your own dataset and upload it to your GitHub page.
+- **Tuesday**, May 14, 2024, 10:00 am–3:30 pm (EDT), including lunch break and lab time: Data Acquisition and Network Analysis. Data sources and repositories. Data extraction. Clean and manage datasets with OpenRefine. Data visualization and manipulation with python. 
   - [Morning Session: Data management and cleaning](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Wokshop-2024/wiki/Tuesday-Morning-Session-3:-Data-Management-and-cleaning)
   - [Afternoon Session: Introduction to Python](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Workshop-2024/wiki/Tuesday-Afternoon-Session-1:-Python-and-Jupyter)
   
-- **Wednesday**, May 15, 2024, 11:00 am–4:30 pm (EDT), including lunch break and lab time: Other Types of Data and Visualizations. Images, video, and more. Data visualization basics and tools (Voyant, Tableau, TimelineJS, and more).
+- **Wednesday**, May 15, 2024, 11:00 am–4:30 pm (EDT), including lunch break and lab time: Other Types of Data and Visualizations. Images, video, and more. Data visualization basics and tools (Voyant, Tableau, TimelineJS, and more). The basics of social network analysis. Use Cytoscape and Gephi to construct and visualize a network based on your own dataset and upload it to your GitHub page.
   - [Morning Session: Other Types of Data](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Wokshop-2024/wiki/Wednesday-Morning-Session-5%3A-Other-Types-of-Data-and-Visualizations.-Images%2C-video%2C-3D-and-more./)
-  - Afternoon Session
+  - [Afternoon Session: Introduction to Network Analysis Tools and Methodologies](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Workshop-2024/wiki/Wednesday-Afternoon-Session-1:-Network-Analysis)
 
 - **Thursday**, May 16, 2024, 11:00 am–4:30 pm (EDT), including lunch break and lab time: Linked Open Data and Geospatial Visualization. Introduction to the Semantic Web and Linked Open Data Technologies (LOD). LOD resources and cultural heritage. Data reconciliation with OpenRefine. The basics of spatial humanities, geodata, and map visualizations using LOD.
   - [Morning Session: Introduction to LOD and data reconciliation](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Wokshop-2024/wiki/Thursday-Morning-Session-7:-Introduction-to-LOD-and-data-reconciliation-with-Open-Refine)
-  - Afternoon Session
+  - [Afternoon Session: An Introduction to QGIS and Digital Gazetteers](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Workshop-2024/wiki/Wednesday-Afternoon-Session-2:-An-Introduction-to-QGIS-and-Digital-Gazetteers)
   
 - **Friday**, May 17, 2024, 10:00 am–3:30 pm (EDT), including lunch break and lab time: Dissemination and Advanced Tools. Data sharing. Digital storytelling. The basics of Python and Jupyter Notebook—tabular data, geospatial, network, and visualization libraries, publish your notebook, resources for further learning.
   - [Morning Session: Digital Curation, Storytelling and Dissemination](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Workshop-2024/wiki/Friday-Morning-Session-9:-Digital-Curation-Storytelling-and-Dissemination)
@@ -26,3 +26,4 @@ In this week-long workshop, led by Paula Loreto Granados García (EMKP, The Brit
 # Time Commitment & Prerequisites
 
 The time commitment for this workshop is 20 hours of instruction and an additional 30 minutes to an hour between sessions for practice exercises and preparation for following session. Participants are expected to attend all sessions.
+
