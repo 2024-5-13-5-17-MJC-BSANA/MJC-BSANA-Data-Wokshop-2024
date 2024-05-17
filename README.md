@@ -19,7 +19,7 @@ In this week-long workshop, led by Paula Loreto Granados García (EMKP, The Brit
   - [Morning Session: Introduction to LOD and data reconciliation](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Wokshop-2024/wiki/Thursday-Morning-Session-7:-Introduction-to-LOD-and-data-reconciliation-with-Open-Refine)
   - [Afternoon Session: An Introduction to QGIS and Digital Gazetteers](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Workshop-2024/wiki/Wednesday-Afternoon-Session-2:-An-Introduction-to-QGIS-and-Digital-Gazetteers)
   
-- **Friday**, May 17, 2024, 10:00 am–3:30 pm (EDT), including lunch break and lab time: Dissemination and Advanced Tools. Data sharing. Digital storytelling. Data visualization, analysis, and publication with additional tools (Voyant, Tableau, TimelineJS, and more).
+- **Friday**, May 17, 2024, 11:00 am–4:30 pm (EDT), including lunch break and lab time: Dissemination and Advanced Tools. Data sharing. Digital storytelling. Data visualization, analysis, and publication with additional tools (Voyant, Tableau, TimelineJS, and more).
   - [Morning Session: Digital Curation, Storytelling and Dissemination](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Workshop-2024/wiki/Friday-Morning-Session-9:-Digital-Curation-Storytelling-and-Dissemination)
   - [Afternoon Session: Further Tools, Visualizations, and Discussion](https://github.com/2024-5-13-5-17-MJC-BSANA/MJC-BSANA-Data-Workshop-2024/wiki/Friday-Afternoon-Session-1:-Further-Tools,-Visualizations,-and-Discussion)
 
